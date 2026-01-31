@@ -50,6 +50,40 @@ const formatThousands = (value) => {
   return value >= 1000 ? `${(value / 1000).toFixed(1)}k` : String(value);
 };
 
+const StyledText = ({ bold, muted, style, children, ...props }) => {
+  const textStyles = [
+    styles.text,
+    muted && styles.muted,
+    bold && styles.bold,
+    style,
+  ];
+
+  return (
+    <Text style={textStyles} {...props}>
+      {children}
+    </Text>
+  );
+};
+
+const LanguageTag = ({ children }) => {
+  return (
+    <View style={styles.language}>
+      <Text style={styles.LanguageTagText}>{children}</Text>
+    </View>
+  );
+};
+
+const Stat = ({ value, label }) => {
+  return (
+    <View style={styles.statItem}>
+      <StyledText bold style={styles.statValue}>
+        {value}
+      </StyledText>
+      <StyledText muted>{label}</StyledText>
+    </View>
+  );
+};
+
 const RepositoryItem = ({ item }) => {
   return (
     <View style={styles.container}>
@@ -57,36 +91,23 @@ const RepositoryItem = ({ item }) => {
         <Image style={styles.avatar} source={{ uri: item.ownerAvatarUrl }} />
 
         <View style={styles.info}>
-          <Text style={styles.fullName}>{item.fullName}</Text>
-          <Text style={styles.description}>{item.description}</Text>
-          <Text style={styles.language}>{item.language}</Text>
+          <StyledText bold style={styles.fullName}>
+            {item.fullName}
+          </StyledText>
+
+          <StyledText muted style={styles.description}>
+            {item.description}
+          </StyledText>
+
+          <LanguageTag>{item.language}</LanguageTag>
         </View>
       </View>
 
       <View style={styles.stats}>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>
-            {formatThousands(item.stargazersCount)}
-          </Text>
-          <Text>Stars</Text>
-        </View>
-
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>
-            {formatThousands(item.forksCount)}
-          </Text>
-          <Text>Forks</Text>
-        </View>
-
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>{item.reviewCount}</Text>
-          <Text>Reviews</Text>
-        </View>
-
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>{item.ratingAverage}</Text>
-          <Text>Rating</Text>
-        </View>
+        <Stat value={formatThousands(item.stargazersCount)} label="Stars" />
+        <Stat value={formatThousands(item.forksCount)} label="Forks" />
+        <Stat value={item.reviewCount} label="Reviews" />
+        <Stat value={item.ratingAverage} label="Rating" />
       </View>
     </View>
   );
