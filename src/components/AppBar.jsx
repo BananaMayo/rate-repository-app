@@ -33,7 +33,7 @@ const AppBar = () => {
           </Text>
         </Link>
 
-        <Link to="/signin" component={Pressable} style={styles.tab}>
+        <Link to="/sign-in" component={Pressable} style={styles.tab}>
           <Text fontWeight="bold" style={styles.tabText}>
             Sign in
           </Text>

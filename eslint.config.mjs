@@ -14,6 +14,11 @@ export default [
         sourceType: "module",
         ecmaFeatures: { jsx: true },
       },
+
+      globals: {
+      console: "readonly",
+      },
+      
     },
     plugins: {
       react: reactPlugin,
