@@ -1,4 +1,6 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
+import Text from './Text';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   fullName: {
-    fontWeight: 'bold',
+    
     marginBottom: 4,
   },
   description: {
@@ -26,12 +28,14 @@ const styles = StyleSheet.create({
   },
   language: {
     alignSelf: 'flex-start',
-    backgroundColor: '#0366d6',
-    color: 'white',
+    backgroundColor: theme.colors.primary,
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 4,
     marginBottom: 8,
+  },
+  languageText: {
+    color: 'white',
   },
   stats: {
     flexDirection: 'row',
@@ -40,9 +44,7 @@ const styles = StyleSheet.create({
   },
   statItem: {
     alignItems: 'center',
-  },
-  statValue: {
-    fontWeight: 'bold',
+    flex: 1,
   },
 });
 
@@ -50,25 +52,10 @@ const formatThousands = (value) => {
   return value >= 1000 ? `${(value / 1000).toFixed(1)}k` : String(value);
 };
 
-const StyledText = ({ bold, muted, style, children, ...props }) => {
-  const textStyles = [
-    styles.text,
-    muted && styles.muted,
-    bold && styles.bold,
-    style,
-  ];
-
-  return (
-    <Text style={textStyles} {...props}>
-      {children}
-    </Text>
-  );
-};
-
 const LanguageTag = ({ children }) => {
   return (
     <View style={styles.language}>
-      <Text style={styles.LanguageTagText}>{children}</Text>
+      <Text style={styles.languageText}>{children}</Text>
     </View>
   );
 };
@@ -76,10 +63,8 @@ const LanguageTag = ({ children }) => {
 const Stat = ({ value, label }) => {
   return (
     <View style={styles.statItem}>
-      <StyledText bold style={styles.statValue}>
-        {value}
-      </StyledText>
-      <StyledText muted>{label}</StyledText>
+      <Text fontWeight="bold">{value}</Text>
+      <Text>{label}</Text>
     </View>
   );
 };
@@ -91,13 +76,13 @@ const RepositoryItem = ({ item }) => {
         <Image style={styles.avatar} source={{ uri: item.ownerAvatarUrl }} />
 
         <View style={styles.info}>
-          <StyledText bold style={styles.fullName}>
+          <Text fontWeight="bold" fontSize="subheading" style={styles.fullName}>
             {item.fullName}
-          </StyledText>
+          </Text>
 
-          <StyledText muted style={styles.description}>
+          <Text color="textSecondary" style={styles.description}>
             {item.description}
-          </StyledText>
+          </Text>
 
           <LanguageTag>{item.language}</LanguageTag>
         </View>
