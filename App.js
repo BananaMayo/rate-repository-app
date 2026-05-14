@@ -8,6 +8,7 @@ import Main from './src/components/Main';
 const apolloClient = createApolloClient();
 
 const App = () => {
+  console.log("env check:", process.env.EXPO_PUBLIC_ENV);
   return (
     <>
       <StatusBar style="light" />
