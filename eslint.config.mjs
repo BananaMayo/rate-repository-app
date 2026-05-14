@@ -2,6 +2,7 @@
 import js from "@eslint/js";
 import reactPlugin from "eslint-plugin-react";
 import reactNativePlugin from "eslint-plugin-react-native";
+import globals from 'globals';
 
 export default [
   js.configs.recommended,
@@ -14,9 +15,11 @@ export default [
         sourceType: "module",
         ecmaFeatures: { jsx: true },
       },
-
       globals: {
-      console: "readonly",
+        ...globals.browser,
+        ...globals.node,
+        console: 'readonly',
+        fetch: 'readonly',
       },
       
     },
