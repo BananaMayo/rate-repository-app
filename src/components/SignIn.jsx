@@ -6,6 +6,7 @@ import Text from './Text';
 import theme from '../theme';
 
 import useSignIn from '../hooks/useSignIn';
+import { useNavigate } from 'react-router-native';
 
 const initialValues = {
   username: '',
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
 
 const SignIn = () => {
   const [signIn] = useSignIn();
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -61,6 +62,7 @@ const SignIn = () => {
       try {
         const { data } = await signIn({ username, password });
         console.log(data);
+        navigate('/');
       } catch (e) {
         console.log(e);
       }
