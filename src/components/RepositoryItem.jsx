@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   fullName: {
-    
+
     marginBottom: 4,
   },
   description: {
@@ -71,7 +71,7 @@ const Stat = ({ value, label }) => {
 
 const RepositoryItem = ({ item }) => {
   return (
-    <View style={styles.container}>
+    <View testID="repositoryItem" style={styles.container}>
       <View style={styles.header}>
         <Image style={styles.avatar} source={{ uri: item.ownerAvatarUrl }} />
 
