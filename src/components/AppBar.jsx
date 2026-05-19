@@ -18,12 +18,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   tab: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     paddingVertical: 16,
   },
   tabText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '700',
   },
 });
@@ -43,7 +43,7 @@ const AppBar = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView horizontal contentContainerStyle={styles.tabs}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.tabs}>
         <Link to="/" component={Pressable} style={styles.tab}>
           <Text fontWeight="bold" style={styles.tabText}>
             Repositories

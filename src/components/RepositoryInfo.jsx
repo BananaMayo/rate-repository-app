@@ -63,7 +63,9 @@ const ReviewItem = ({ review }) => {
 
 const RepositoryInfo = () => {
   const { id } = useParams();
-  const { repository } = useRepository(id);
+  const { repository, fetchMore } = useRepository(id, {
+    first: 3,
+  });
 
   if (!repository) {
     return null;
@@ -82,6 +84,8 @@ const RepositoryInfo = () => {
       ListHeaderComponent={() => (
         <RepositoryItem item={repository} showGitHubButton />
       )}
+      onEndReached={fetchMore}
+      onEndReachedThreshold={0.5}
     />
   );
 };
