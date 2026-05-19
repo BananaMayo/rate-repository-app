@@ -61,12 +61,14 @@ export const SignInContainer = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
       <TextInput
+        style={styles.input}
         placeholder="Username"
         value={formik.values.username}
         onChangeText={formik.handleChange('username')}
       />
 
       <TextInput
+        style={styles.input}
         placeholder="Password"
         secureTextEntry
         value={formik.values.password}
